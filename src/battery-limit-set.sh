@@ -8,3 +8,5 @@ case "$VALUE" in
     *) echo "Invalid value" >&2; exit 1 ;;
 esac
 echo "$VALUE" > "$THRESHOLD"
+mkdir -p /var/lib/battery-limit
+echo "$VALUE" > /var/lib/battery-limit/limit

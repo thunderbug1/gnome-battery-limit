@@ -41,8 +41,21 @@ class BatteryLimitIndicator extends PanelMenu.Button {
         this._limitItem.connect('activate', () => this._setThreshold(80));
 
         this._readThreshold();
+        this._applyPersisted();
         this._monitor = null;
         this._setupMonitor();
+    }
+
+    _applyPersisted() {
+        try {
+            const [, contents] = GLib.file_get_contents('/var/lib/battery-limit/limit');
+            const saved = parseInt(new TextDecoder().decode(contents).trim());
+            const current = parseInt(GLib.file_get_contents(THRESHOLD_PATH)[1]);
+            if (saved === 80 && current !== 80)
+                this._setThreshold(saved);
+        } catch (e) {
+            // no saved limit yet
+        }
     }
 
     _setupMonitor() {
