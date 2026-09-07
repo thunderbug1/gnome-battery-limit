@@ -1,0 +1,7 @@
+{
+    "uuid": "battery-limit@thinx",
+    "name": "Battery Charge Limit",
+    "description": "Switch between full charge (100%) and long-term battery protection (80%) from the top bar.",
+    "shell-version": ["45", "46", "47", "48", "49", "50"],
+    "url": "local"
+}
